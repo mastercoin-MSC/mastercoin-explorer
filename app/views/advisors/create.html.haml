@@ -1,0 +1,16 @@
+%h1 Advice for transaction
+%p Step 1: Send all funds in your wallet to the address which owns the MasterCoins (the following sends must come from that address)
+%p Step 2: Send exactly 0.00006 BTC from your address to each of the following 3 addresses in one transaction:
+%table.table
+  %tr
+    %th The Exodus address
+    %td
+      1EXoDusjGwvnjZUyKkxZ4UHEf77z6A5S4P
+  %tr
+    %th The recipient address
+    %td
+      = @advisor.advice_object.receiving_address
+  %tr
+    %th The data address
+    %td
+      = @advisor.advice_object.data_address

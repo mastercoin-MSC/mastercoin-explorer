@@ -1,0 +1,25 @@
+%table.table
+  %thead
+    %th Transaction ID
+    %th Receiving address
+    -unless short
+      %th Source address
+    %th Currency
+    %th Amount
+    %th Block time
+    %th Status
+  -transactions.each do |payment|
+    %tr
+      %td=link_to truncate(payment.tx_id, length: 15), transaction_path(payment.tx_id)
+      %td=link_to payment.receiving_address, address_path(payment.receiving_address)
+      -unless short
+        %td=link_to payment.address, address_path(payment.address)
+      %td=payment.currency
+      %td=payment.amount
+      -if 3.hours.ago > payment.tx_date
+        %td=l(payment.tx_date, format: :short)
+      -else
+        %td
+          =distance_of_time_in_words_to_now(payment.tx_date)
+          ago
+      %td=raw valid_label(payment)
